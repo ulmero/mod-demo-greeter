@@ -1,0 +1,37 @@
+# Publish this module to Ulmero.
+#
+# Runs on every push to main. All the work is done by one workflow that lives
+# in ulmero/platform: it checks the module against module format 1, builds it
+# alone on the newest release, runs the build's smoke test, packs the module's
+# files into an artifact, pushes it to Ulmero's `modules` registry and tells
+# the control plane. There is no key, no password and no secret in this
+# repository, and there must never be one.
+#
+# Do not add steps here and do not replace the `uses` line. The control plane
+# accepts a version only from that exact workflow (it reads the token's
+# `job_workflow_ref`), so a publish made any other way is refused.
+#
+# A version is published once. To publish a change, raise "version" in
+# module.json; the same version again is refused.
+name: Publish module
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One publish at a time: two runs pushing the same version would race, and the
+# tags are immutable, so the loser fails on push.
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    permissions:
+      contents: read
+      id-token: write # the registry (Workload Identity Federation) and the control-plane token
+    uses: ulmero/platform/.github/workflows/module-publish.yml@main

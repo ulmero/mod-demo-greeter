@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS demo_greeter_counts (
+  account_id TEXT PRIMARY KEY REFERENCES core_accounts(id) ON DELETE CASCADE,
+  count INTEGER NOT NULL DEFAULT 0
+);
