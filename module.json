@@ -4,7 +4,7 @@
   "slug": "greeter",
   "name": "Greeter",
   "description": "Says hello and counts how often. A demo module with a scheduled task.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "core": ">=0.4.0",
   "features": [
     { "key": "Demo.Greeter", "label": "Greeter", "group": "Demo modules", "description": "Say hello and count the greetings." }

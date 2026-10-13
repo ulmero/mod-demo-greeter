@@ -2,9 +2,9 @@ node_modules/
 .nuxt/
 .output/
 # Written by the composer when it builds the module. A module never ships them.
-api/nuxt.config.ts
-api/package.json
-admin/nuxt.config.ts
-admin/package.json
-admin/app/app.config.ts
-admin/i18n/i18n.config.ts
+apps/api/nuxt.config.ts
+apps/api/package.json
+apps/admin/nuxt.config.ts
+apps/admin/package.json
+apps/admin/app/app.config.ts
+apps/admin/i18n/i18n.config.ts
