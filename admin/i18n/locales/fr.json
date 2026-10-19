@@ -1,0 +1,10 @@
+{
+  "demo": {
+    "greeter": {
+      "nav": "Salutations",
+      "title": "Salutations",
+      "greeted": "Bonjour du module de salutations. Salué {count} fois. | Bonjour du module de salutations. Salué {count} fois.",
+      "greetAgain": "Saluer encore"
+    }
+  }
+}

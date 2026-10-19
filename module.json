@@ -4,7 +4,7 @@
   "slug": "greeter",
   "name": "Greeter",
   "description": "Says hello and counts how often. A demo module with a scheduled task.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "core": ">=0.4.0",
   "features": [
     { "key": "Demo.Greeter", "label": "Greeter", "group": "Demo modules", "description": "Say hello and count the greetings." }
@@ -13,7 +13,7 @@
     { "path": "/demo/greeter", "access": "Demo.Greeter", "why": "Drives /api/demo/greeter/hello, gated Demo.Greeter." }
   ],
   "nav": [
-    { "label": "Greeter", "icon": "i-lucide-hand", "feature": "Demo.Greeter", "to": "/demo/greeter" }
+    { "label": "Greeter", "labelKey": "demo.greeter.nav", "icon": "i-lucide-hand", "feature": "Demo.Greeter", "to": "/demo/greeter" }
   ],
   "routes": [
     { "method": "GET", "route": "/api/demo/greeter/hello", "description": "Greet the caller and count it for the account", "auth": "Demo.Greeter" }
