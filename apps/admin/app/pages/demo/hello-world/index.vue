@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // Demo module page: say hello (the count and a dialog), and keep notes.
+// Loads read with useApiFetch; changes go through useApiClient.
 interface Greetings { count: number, lastAt: string | null }
 interface Note { id: number, ref: string, body: string, createdAt: string }
 
@@ -7,22 +8,20 @@ const { t } = useI18n()
 const api = useApiClient()
 const toast = useAppToast()
 
-const greetings = ref<Greetings | null>(null)
+const { data: greetings, status: greetingsStatus, error: greetingsError } = useApiFetch<Greetings>(
+  '/api/demo/hello-world/hello',
+  { lazy: true }
+)
+const { data: notesData, status: notesStatus, error: notesError } = useApiFetch<{ notes: Note[] }>(
+  '/api/demo/hello-world/notes',
+  { lazy: true, default: () => ({ notes: [] }) }
+)
+const notes = computed(() => notesData.value?.notes ?? [])
+
 const helloOpen = ref(false)
 const greeting = ref(false)
-
-const notes = ref<Note[]>([])
 const draft = ref('')
 const adding = ref(false)
-
-async function load() {
-  const [g, n] = await Promise.all([
-    api<Greetings>('/api/demo/hello-world/hello'),
-    api<{ notes: Note[] }>('/api/demo/hello-world/notes')
-  ])
-  greetings.value = g
-  notes.value = n.notes
-}
 
 async function sayHello() {
   greeting.value = true
@@ -40,7 +39,7 @@ async function addNote() {
   if (!draft.value.trim()) return
   adding.value = true
   try {
-    notes.value = (await api<{ notes: Note[] }>('/api/demo/hello-world/notes', { method: 'POST', body: { body: draft.value } })).notes
+    notesData.value = await api<{ notes: Note[] }>('/api/demo/hello-world/notes', { method: 'POST', body: { body: draft.value } })
     draft.value = ''
   } catch (e) {
     toast.error(e, t('demo.helloWorld.addFailed'))
@@ -48,8 +47,6 @@ async function addNote() {
     adding.value = false
   }
 }
-
-onMounted(load)
 </script>
 
 <template>
@@ -59,12 +56,15 @@ onMounted(load)
         <template #header>
           <h2 class="font-semibold">{{ t('demo.helloWorld.helloHeading') }}</h2>
         </template>
-        <div class="flex items-center justify-between gap-4">
-          <p v-if="greetings">{{ t('demo.helloWorld.count', greetings.count) }}</p>
-          <UButton icon="i-lucide-hand" :loading="greeting" @click="sayHello">
-            {{ greetings?.count ? t('demo.helloWorld.sayHelloAgain') : t('demo.helloWorld.sayHello') }}
-          </UButton>
-        </div>
+        <LoadingGate :loading="greetingsStatus === 'pending'">
+          <EmptyState v-if="greetingsError" :message="t('demo.helloWorld.loadFailed')" :bordered="false" />
+          <div v-else class="flex items-center justify-between gap-4">
+            <p>{{ t('demo.helloWorld.count', greetings?.count ?? 0) }}</p>
+            <UButton icon="i-lucide-hand" :loading="greeting" @click="sayHello">
+              {{ greetings?.count ? t('demo.helloWorld.sayHelloAgain') : t('demo.helloWorld.sayHello') }}
+            </UButton>
+          </div>
+        </LoadingGate>
       </UCard>
 
       <UCard>
@@ -78,13 +78,16 @@ onMounted(load)
               {{ t('demo.helloWorld.add') }}
             </UButton>
           </form>
-          <EmptyState v-if="!notes.length" :message="t('demo.helloWorld.noNotes')" :bordered="false" />
-          <ul v-else class="space-y-2">
-            <li v-for="n in notes" :key="n.id" class="rounded border border-default p-3">
-              <p>{{ n.body }}</p>
-              <p class="text-xs text-muted">{{ n.ref }} · {{ new Date(n.createdAt).toLocaleString() }}</p>
-            </li>
-          </ul>
+          <LoadingGate :loading="notesStatus === 'pending'">
+            <EmptyState v-if="notesError" :message="t('demo.helloWorld.loadFailed')" :bordered="false" />
+            <EmptyState v-else-if="!notes.length" :message="t('demo.helloWorld.noNotes')" :bordered="false" />
+            <ul v-else class="space-y-2">
+              <li v-for="n in notes" :key="n.id" class="rounded border border-default p-3">
+                <p>{{ n.body }}</p>
+                <p class="text-xs text-muted">{{ n.ref }} · {{ formatWhen(n.createdAt) }}</p>
+              </li>
+            </ul>
+          </LoadingGate>
         </div>
       </UCard>
     </div>

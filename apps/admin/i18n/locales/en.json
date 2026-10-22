@@ -8,11 +8,12 @@
       "sayHello": "Say hello",
       "sayHelloAgain": "Say hello again",
       "helloWorld": "Hello, world!",
-      "helloFailed": "Could not say hello",
+      "helloFailed": "Hello failed",
+      "loadFailed": "Load failed",
       "notesHeading": "Notes",
       "placeholder": "Write a note",
       "add": "Add",
-      "addFailed": "Could not add the note",
+      "addFailed": "Add failed",
       "noNotes": "No notes yet."
     }
   }

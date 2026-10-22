@@ -8,11 +8,12 @@
       "sayHello": "Saludar",
       "sayHelloAgain": "Saludar de nuevo",
       "helloWorld": "¡Hola, mundo!",
-      "helloFailed": "No se pudo saludar",
+      "helloFailed": "El saludo falló",
+      "loadFailed": "La carga falló",
       "notesHeading": "Notas",
       "placeholder": "Escribe una nota",
       "add": "Añadir",
-      "addFailed": "No se pudo añadir la nota",
+      "addFailed": "No se pudo añadir",
       "noNotes": "Todavía no hay notas."
     }
   }
