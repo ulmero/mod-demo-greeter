@@ -1,0 +1,10 @@
+{
+  "demo": {
+    "greeter": {
+      "nav": "Greeter",
+      "title": "Greeter",
+      "greeted": "Hello from the greeter module. Greeted {count} time. | Hello from the greeter module. Greeted {count} times.",
+      "greetAgain": "Greet again"
+    }
+  }
+}
