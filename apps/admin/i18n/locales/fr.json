@@ -1,10 +1,19 @@
 {
   "demo": {
-    "greeter": {
-      "nav": "Salutations",
-      "title": "Salutations",
-      "greeted": "Bonjour du module de salutations. Salué {count} fois. | Bonjour du module de salutations. Salué {count} fois.",
-      "greetAgain": "Saluer encore"
+    "helloWorld": {
+      "nav": "Bonjour le monde",
+      "title": "Bonjour le monde",
+      "helloHeading": "Dire bonjour",
+      "count": "Vous avez dit bonjour {count} fois. | Vous avez dit bonjour {count} fois. | Vous avez dit bonjour {count} fois.",
+      "sayHello": "Dire bonjour",
+      "sayHelloAgain": "Redire bonjour",
+      "helloWorld": "Bonjour, le monde !",
+      "helloFailed": "Impossible de dire bonjour",
+      "notesHeading": "Notes",
+      "placeholder": "Écrivez une note",
+      "add": "Ajouter",
+      "addFailed": "Impossible d’ajouter la note",
+      "noNotes": "Aucune note pour l’instant."
     }
   }
 }
