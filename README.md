@@ -1,7 +1,6 @@
-# demo.hello-world
+# mod-hello-world
 
-The demo module for Ulmero, in module format 1. Copy it to start a new module.
-See `docs/MODULES.md` in `ulmero/platform` for the format.
+The demo module for Ulmero (`demo.hello-world`), in module format 1. It adds a page called "Hello world" with some simple test UI. It is a good test that you can install an external module into your copy of Ulmero, and a starting point to copy for a new module. See `docs/MODULES.md` in `ulmero/platform` for the format.
 
 It shows each part a module can have:
 
