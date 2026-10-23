@@ -1,0 +1,20 @@
+{
+  "demo": {
+    "helloWorld": {
+      "nav": "Hola mundo",
+      "title": "Hola mundo",
+      "helloHeading": "Saludar",
+      "count": "Saludaste {count} veces. | Saludaste {count} vez. | Saludaste {count} veces.",
+      "sayHello": "Saludar",
+      "sayHelloAgain": "Saludar de nuevo",
+      "helloWorld": "¡Hola, mundo!",
+      "helloFailed": "El saludo falló",
+      "loadFailed": "La carga falló",
+      "notesHeading": "Notas",
+      "placeholder": "Escribe una nota",
+      "add": "Añadir",
+      "addFailed": "No se pudo añadir",
+      "noNotes": "Todavía no hay notas."
+    }
+  }
+}

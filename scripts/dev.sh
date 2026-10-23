@@ -74,13 +74,13 @@ cp "$COMPOSER/compose.mjs" "$COMPOSER/Dockerfile" "$CTX/"
 DEST="$CTX/modules/$NAMESPACE/$SLUG"
 mkdir -p "$DEST"
 # The places module format 1 names, and nothing else of this repository.
-for path in module.json schema.sql README.md tests api admin; do
+for path in module.json schema.sql README.md tests apps; do
   [ -e "$HERE/$path" ] && cp -R "$HERE/$path" "$DEST/"
 done
 # What a build on this machine may have left behind, and what the composer writes itself.
 find "$DEST" \( -name node_modules -o -name .nuxt -o -name .output \) -prune -exec rm -rf {} +
-rm -f "$DEST/api/nuxt.config.ts" "$DEST/api/package.json" "$DEST/admin/nuxt.config.ts" \
-  "$DEST/admin/package.json" "$DEST/admin/app/app.config.ts" "$DEST/admin/i18n/i18n.config.ts"
+rm -f "$DEST/apps/api/nuxt.config.ts" "$DEST/apps/api/package.json" "$DEST/apps/admin/nuxt.config.ts" \
+  "$DEST/apps/admin/package.json" "$DEST/apps/admin/app/app.config.ts" "$DEST/apps/admin/i18n/i18n.config.ts"
 (cd "$DEST" && find . -type f | sed 's|^\./|  |' | sort)
 
 step "3. compose and build: the composer checks the module first"
