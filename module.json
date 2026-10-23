@@ -1,21 +1,25 @@
 {
   "format": 1,
   "namespace": "demo",
-  "slug": "greeter",
-  "name": "Greeter",
-  "description": "Says hello and counts how often. A demo module with a scheduled task.",
-  "version": "0.2.2",
+  "slug": "hello-world",
+  "name": "Hello world",
+  "description": "Says hello and keeps short notes per account. The demo module: a page, four routes, two tables, a migration, a scheduled task and its own npm package.",
+  "version": "0.1.0",
   "core": ">=0.4.0",
   "features": [
-    { "key": "Demo.Greeter", "label": "Greeter", "group": "Demo modules", "description": "Say hello and count the greetings." }
+    { "key": "Demo.HelloWorld", "label": "Hello world", "group": "Demo modules", "description": "Say hello and keep short notes for the account." }
   ],
   "pages": [
-    { "path": "/demo/greeter", "access": "Demo.Greeter", "why": "Drives /api/demo/greeter/hello, gated Demo.Greeter." }
+    { "path": "/demo/hello-world", "access": "Demo.HelloWorld", "why": "Drives /api/demo/hello-world/hello and /api/demo/hello-world/notes, gated Demo.HelloWorld." }
   ],
   "nav": [
-    { "label": "Greeter", "labelKey": "demo.greeter.nav", "icon": "i-lucide-hand", "feature": "Demo.Greeter", "to": "/demo/greeter" }
+    { "label": "Hello world", "labelKey": "demo.helloWorld.nav", "icon": "i-lucide-hand", "feature": "Demo.HelloWorld", "to": "/demo/hello-world" }
   ],
   "routes": [
-    { "method": "GET", "route": "/api/demo/greeter/hello", "description": "Greet the caller and count it for the account", "auth": "Demo.Greeter" }
-  ]
+    { "method": "GET", "route": "/api/demo/hello-world/hello", "description": "How often the account said hello", "auth": "Demo.HelloWorld" },
+    { "method": "POST", "route": "/api/demo/hello-world/hello", "description": "Say hello and count it for the account", "auth": "Demo.HelloWorld" },
+    { "method": "GET", "route": "/api/demo/hello-world/notes", "description": "The account's notes, newest first", "auth": "Demo.HelloWorld" },
+    { "method": "POST", "route": "/api/demo/hello-world/notes", "description": "Add a note to the account", "auth": "Demo.HelloWorld" }
+  ],
+  "dependencies": { "api": { "left-pad": "1.3.0" } }
 }

@@ -1,10 +1,20 @@
 {
   "demo": {
-    "greeter": {
-      "nav": "Greeter",
-      "title": "Greeter",
-      "greeted": "Hello from the greeter module. Greeted {count} time. | Hello from the greeter module. Greeted {count} times.",
-      "greetAgain": "Greet again"
+    "helloWorld": {
+      "nav": "Hello world",
+      "title": "Hello world",
+      "helloHeading": "Say hello",
+      "count": "You said hello {count} times. | You said hello {count} time. | You said hello {count} times.",
+      "sayHello": "Say hello",
+      "sayHelloAgain": "Say hello again",
+      "helloWorld": "Hello, world!",
+      "helloFailed": "Hello failed",
+      "loadFailed": "Load failed",
+      "notesHeading": "Notes",
+      "placeholder": "Write a note",
+      "add": "Add",
+      "addFailed": "Add failed",
+      "noNotes": "No notes yet."
     }
   }
 }
